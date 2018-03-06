@@ -29,6 +29,7 @@ protected:
 	BNode<T>* find(BNode<T>*t,T value);
 
 	BNode<T>* create(std::vector<T>& vec, int&pos);//«∞–Úππ‘Ï
+	BNode<T>* &getSuccessor(BNode<T>* &delNode);
 
 public:
 
@@ -113,6 +114,28 @@ inline BNode<T> * BinaryTree<T>::create(std::vector<T> &vec, int & pos)
 		}
 	}
 	return t;
+}
+
+template<class T>
+inline BNode<T>* &BinaryTree<T>::getSuccessor(BNode<T>* &delNode)
+{
+	BNode<T>* curr = delNode->rightNode;
+	BNode<T>* succe = curr;
+	BNode<T>* parent = NULL;
+
+	while (curr!=NULL)
+	{
+		parent = succe;
+		succe = curr;
+		curr = curr->rightNode;
+	}
+
+	if (succe!=delNode->rightNode)
+	{
+		parent->leftNode = succe->rightNode;
+		succe->rightNode = delNode->rightNode;
+	}
+	return succe;
 }
 
 template<class T>
@@ -206,15 +229,50 @@ inline void BinaryTree<T>::DelNode(T t)
 			delete root;
 			root = NULL;
 		}
+		else if (isLeftNode)
+		{
+			parent->leftNode = NULL;
+		}
+		else
+		{
+			parent->rightNode = NULL;
+		}
 	}
-	else if(isLeftNode)
+	else if (current->rightNode ==NULL)
+	{
+		if (current==root)
+		{
+			root = root->leftNode;
+		}
+		else if (isLeftNode)
+		{
+			parent->leftNode = current->leftNode;
+		}
+		else
+		{
+			parent->rightNode = current->rightNode;
+		}
+	}
+	else if (current->leftNode==NULL)
+	{
+		if (current == root)
+		{
+			root = root->rightNode;
+		}
+		else if (isLeftNode)
+		{
+			parent->leftNode = current->rightNode;
+		}
+		else
+		{
+			parent->rightNode = current->rightNode;
+		}
+	}
+	else
 	{
 
 	}
-	else if
-	{
-
-	}
+	
 }
 
 template<class T>
