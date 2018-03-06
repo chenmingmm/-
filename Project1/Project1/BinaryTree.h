@@ -163,7 +163,7 @@ inline BNode<T>* BinaryTree<T>::Find(T value)
 		{
 			return(re);
 		}
-		if (q->data < value)
+		if (q->data > value)
 			q = q->leftNode;
 		else
 			q = q->rightNode;
@@ -186,13 +186,13 @@ inline void BinaryTree<T>::DelNode(T t)
 	{
 		parent = current;
 
-		if (t>current->data)
+		if (t<current->data)
 		{
 			isLeftNode = true;
 			current = current->leftNode;
 
 		}
-		else if(t<current->data)
+		else if(t>current->data)
 		{
 			isLeftNode = false;
 			current = current->rightNode;
@@ -226,11 +226,11 @@ inline void BinaryTree<T>::insert(BNode<T>* &t, T &value)
 		t = new BNode<T>;
 		t->data = value;
 	}
-	else if(value>temp->data)
+	else if(value<temp->data)
 	{
 		insert(temp->leftNode, value);
 	}
-	else if(value<temp->data)
+	else if(value>temp->data)
 	{
 		insert(temp->rightNode, value);
 	}
