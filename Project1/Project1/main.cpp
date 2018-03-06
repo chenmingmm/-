@@ -178,7 +178,7 @@ struct TEST
 int main()
 {
 	BinaryTree<int> tree;
-	std::vector<int> vec = { 1,3,4,5};
+	std::vector<int> vec = { 1,3,4,5,2,10,9};
 	//int arry[] = { 1,2,4,5,6,3 };
 	////tree.createBiTree(vec);
 	for (auto iter : vec)
@@ -190,7 +190,9 @@ int main()
 
 
 	tree.preOrder();
-
+	tree.DelNode(3);
+	cout << endl;
+	tree.preOrder();
 	auto a = tree.Find(5);
 	//B a;
 	//a.QuitSort(arry, 0, 5);
