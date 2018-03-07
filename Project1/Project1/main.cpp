@@ -10,6 +10,38 @@ using namespace std;
 #include<string>
 #include"BinaryTree.h"
 
+
+
+void StrSplit(vector<string> &result, const char*src, const char*pattern)
+{
+	result.clear();
+
+	if (!src ||!pattern)
+		return;
+
+	string str;
+	str = src;
+	str += pattern;
+
+	string::size_type pos;
+	auto size = (unsigned int)str.size();
+	int patternSize = (int)strlen(pattern);
+
+	std::string s;
+
+	for (unsigned int i = 0; i < size; i++)
+	{
+		pos = str.find(pattern,i);
+		if (pos<size)
+		{
+			s = str.substr(i, pos - i);
+			result.push_back(s);
+			i = unsigned int(int(pos) + patternSize - 1);
+		}
+	}
+}
+
+
 class A
 {
 public:
@@ -194,6 +226,11 @@ int main()
 	cout << endl;
 	tree.preOrder();
 	auto a = tree.Find(5);
+
+
+	std::string str = "1345";
+	vector<string> vec_str;
+	StrSplit(vec_str, str.c_str(), ";");
 	//B a;
 	//a.QuitSort(arry, 0, 5);
 	system("pause");
